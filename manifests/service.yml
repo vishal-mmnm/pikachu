@@ -1,0 +1,14 @@
+apiVersion: v1 # API version
+kind: Service # resource type
+metadata:
+  name: pikachu # name of the service
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: LoadBalancer # type of the service https://cloud.google.com/kubernetes-engine/docs/concepts/ingress#default_backend
+  ports:
+  - port: 80 # port to expose
+    targetPort: 8000 # port to forward to
+    protocol: TCP
+  selector:
+    app: pikachu # labels of the selector

@@ -54,6 +54,10 @@ async def read_root():
 def clean_up():
     if os.path.exists('output_mmCIF'):
         shutil.rmtree('output_mmCIF')
+    if os.path.exists('output_PDB'):
+        shutil.rmtree('output_PDB')
+    if os.path.exists('PDB'):
+        shutil.rmtree('PDB')
     if os.path.exists('SIFTS'):
         shutil.rmtree('SIFTS')
     if os.path.exists('mmCIF'):
@@ -62,23 +66,25 @@ def clean_up():
         os.remove('log_corrected.txt')
     if os.path.exists('log_translator.txt'):
         os.remove('log_translator.txt')
-    if os.path.exists('log_sifter.txt'):
+    if os.path.exists('output_mmCIF.zip'):
         os.remove('output_mmCIF.zip')
 
 @app.get("/pdbrenum", response_class=FileResponse)
-async def read_item(rfla: str, mmCIF: str):
-    clean_up()
+async def read_item(rfla: str, mmCIF: str = 'false', PDB: str = 'false'):
+    clean_up() 
     module_name = 'PDBrenum'
-    out_dir = 'output_mmCIF'
+    out_dir = 'output_mmCIF' if mmCIF == 'true' else 'output_PDB'
     arguments = []
-    print(rfla, mmCIF)
-    if rfla:
-        arguments.append('-rfla')
-        arguments.append(rfla)
+   
     if mmCIF == 'true':
         arguments.append('-mmCIF')
-    call_module(module_name, arguments)
+    elif PDB == 'true':
+        arguments.append('-PDB')
 
+    ids = rfla.split(' ')
+    for id in ids:
+        call_module(module_name, ['-rfla', id] + arguments)
+    # call_module(module_name, arguments)
 
     zip_directory(out_dir, out_dir)
 

@@ -1,0 +1,27 @@
+# kubernetes deployment
+apiVersion: apps/v1 # API version
+kind: Deployment # resource type
+metadata:
+  name: pikachu # name of the deployment
+spec:
+  replicas: 1 # number of replicas
+  selector:
+    matchLabels:
+      app: pikachu
+  template:
+    metadata:
+      labels:
+        app: pikachu
+    spec:
+      containers:
+      - name: pikachu-container # name of the container
+        image: us-docker.pkg.dev/sublime-bongo-369623/services/pikachu:v0.2 # image to run
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 2048Mi
+        args: []
+        volumeMounts: # https://cloud.google.com/kubernetes-engine/docs/tutorials/visionenticating-to-cloud-platform#kubectl
+        ports:
+        - containerPort: 8000 # port to expose
+
