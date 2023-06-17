@@ -5,13 +5,10 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 
-
-
 # Example usage:
 # delete_directory('/path/to/your/directory')
 def delete_directory(directory):
     shutil.rmtree(directory)
-
 
 
 # Example usage:
