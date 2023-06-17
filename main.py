@@ -14,7 +14,6 @@ def delete_directory(directory):
 
 
 
-
 # Example usage:
 # files = get_files_in_directory('/path/to/your/directory')
 # for file in files:
