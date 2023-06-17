@@ -4,3 +4,5 @@ output_mmCIF
 mmCIF
 log_corrected.txt
 log_translator.txt
+output_mmCIF.zip
+.DS_Store
