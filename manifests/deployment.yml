@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: pikachu-container # name of the container
-        image: us-docker.pkg.dev/sublime-bongo-369623/services/pikachu:v0.2 # image to run
+        image: us-docker.pkg.dev/sublime-bongo-369623/services/pikachu:v0.3 # image to run
         resources:
           requests:
             cpu: 2000m
